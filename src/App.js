@@ -8,12 +8,12 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
 function App() {
   return (
-    <div className="App">
+    <div>
        <Router>
              <Routes>
                 <Route path='/' element={<ExternalLayout/>}/>
                 <Route path='/visitors/*' element={<ExternalLayout/>}/>
-                <Route path='/easyfinance/*' element={<InternalLayout/>}/>
+                <Route path='/bankloan/*' element={<InternalLayout/>}/>
               
               </Routes>
        </Router>
