@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-
 const Enquirycom = () => {
   const [customerId, setCustomerId] = useState(null);
   const [customers, setCustomers] = useState([]);
