@@ -12,24 +12,18 @@ import Enquirycom from "../pages/enquiry/Enquirycom";
 function ExternalLayout() {
   return (
     <div>
-
-        <Header/>
-         <div className='navigationContainer'>
-            <Routes>
-            <Route path='/' element={<About/>} />
-        {/* HELLO */}
-
-                <Route path='/about' element={<About/>} />
-                <Route path='/services' element={<OurService/>} />
-                <Route path='/emi-calculator' element={<EmiClalculator/>} />
-                <Route path='/enquiry' element={<Enquirycom/>}/>
-                <Route path='/sign-in' element={<Login/>} />
-            </Routes>
-         </div>
-         <Footer/>
-
-
-    
+      <Header />
+      <div className="navigationContainer">
+        <Routes>
+          <Route path="/" element={<About />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<OurService />} />
+          <Route path="/emi-calculator" element={<EmiClalculator />} />
+          <Route path="/enquiry" element={<Enquirycom />} />
+          <Route path="/sign-in" element={<Login />} />
+        </Routes>
+      </div>
+      <Footer />
     </div>
   );
 }
