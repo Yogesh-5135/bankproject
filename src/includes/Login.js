@@ -1,10 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function Login() {
-  const { handleSubmit, register } = useForm();
+export default function Login() {
+  const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const saveData = (data) => {
@@ -15,6 +15,7 @@ function Login() {
         )
         .then((res) => {
           console.log(res.data);
+          sessionStorage.setItem("user", JSON.stringify(res.data));
           navigate("/bankloan");
         })
         .catch((error) => alert(error.message));
@@ -64,5 +65,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;
