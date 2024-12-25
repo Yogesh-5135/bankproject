@@ -7,7 +7,7 @@ import '../styles/ExternalLayout.css'
 import OurService from '../templates/OurService'
 import EmiClalculator from '../includes/EmiClalculator'
 import Login from '../includes/Login'
-import RegisterEnquiry from '../pages/enquiry/RegisterEnquiry'
+import Enquirycom from '../pages/enquiry/Enquirycom'
 
 function ExternalLayout() {
   return (
@@ -19,7 +19,7 @@ function ExternalLayout() {
                 <Route path='/about' element={<About/>} />
                 <Route path='/services' element={<OurService/>} />
                 <Route path='/emi-calculator' element={<EmiClalculator/>} />
-                <Route path='/enquiry' element={<RegisterEnquiry/>}/>
+                <Route path='/enquiry' element={<Enquirycom/>}/>
                 <Route path='/sign-in' element={<Login/>} />
             </Routes>
          </div>
