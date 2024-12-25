@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function SideNav({userType}) {
+    
     const prefix='/easyfinance/';
     const userMenus=[
        //0 index

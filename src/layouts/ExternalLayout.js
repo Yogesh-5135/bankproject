@@ -16,6 +16,8 @@ function ExternalLayout() {
          <div className='navigationContainer'>
             <Routes>
             <Route path='/' element={<About/>} />
+        {/* HELLO */}
+
                 <Route path='/about' element={<About/>} />
                 <Route path='/services' element={<OurService/>} />
                 <Route path='/emi-calculator' element={<EmiClalculator/>} />
