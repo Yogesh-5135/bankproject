@@ -1,17 +1,18 @@
-import React from 'react'
-import Header from '../templates/Header'
-import Footer from '../templates/Footer'
-import { Route, Routes } from 'react-router-dom'
-import About from '../templates/About'
-import '../styles/ExternalLayout.css'
-import OurService from '../templates/OurService'
-import EmiClalculator from '../includes/EmiClalculator'
-import Login from '../includes/Login'
-import Enquirycom from '../pages/enquiry/Enquirycom'
+import React from "react";
+import Header from "../templates/Header";
+import Footer from "../templates/Footer";
+import { Route, Routes } from "react-router-dom";
+import About from "../templates/About";
+import "../styles/ExternalLayout.css";
+import OurService from "../templates/OurService";
+import EmiClalculator from "../includes/EmiClalculator";
+import Login from "../includes/Login";
+import Enquirycom from "../pages/enquiry/Enquirycom";
 
 function ExternalLayout() {
   return (
     <div>
+
         <Header/>
          <div className='navigationContainer'>
             <Routes>
@@ -27,8 +28,10 @@ function ExternalLayout() {
          </div>
          <Footer/>
 
+
+    
     </div>
-  )
+  );
 }
 
-export default ExternalLayout
+export default ExternalLayout;
