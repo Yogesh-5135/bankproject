@@ -18,6 +18,7 @@ const EmployeeEnrollment = () => {
   const [empImage, setEmpImage] = useState(null);
   const [empPanCard, setEmpPanCard] = useState(null);
 
+  // Function to fetch data if editing an employee
   const getEditData = () => {
     if (empID) {
       axios
@@ -25,23 +26,28 @@ const EmployeeEnrollment = () => {
         .then((response) => {
           const employeeData = response.data;
           const formFields = [
-            'empFirstName', 'empMiddleName', 'empLastName', 
-            'empEmail', 'empSalary', 'empAge', 'userType'
+            "empFirstName",
+            "empMiddleName",
+            "empLastName",
+            "empEmail",
+            "empSalary",
+            "empAge",
+            "userType",
           ];
 
           for (let prop in employeeData) {
             if (formFields.includes(prop)) {
               setValue(prop, employeeData[prop]);
-            }
-            else if (prop === 'empImage') {
+            } else if (prop === "empImage") {
               setEmpImage(employeeData[prop]);
-            } else if (prop === 'empPancard') {
+            } else if (prop === "empPancard") {
               setEmpPanCard(employeeData[prop]);
             }
           }
         })
         .catch((error) => {
           console.error("Error fetching employee data:", error);
+          alert("Error fetching employee data.");
         });
     }
   };
@@ -54,6 +60,7 @@ const EmployeeEnrollment = () => {
     }
   }, [empID, reset]);
 
+  // Handle image upload for employee image
   const onSelectEmpImage = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -65,6 +72,7 @@ const EmployeeEnrollment = () => {
     }
   };
 
+  // Handle image upload for pan card
   const onSelectPanCard = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -76,8 +84,10 @@ const EmployeeEnrollment = () => {
     }
   };
 
+  // Submit form data (either create or update)
   const onSubmit = (data) => {
     const formData = new FormData();
+
     const employeeInfo = {
       empFirstName: data.empFirstName,
       empMiddleName: data.empMiddleName,
@@ -89,23 +99,36 @@ const EmployeeEnrollment = () => {
     };
 
     formData.append("info", JSON.stringify(employeeInfo));
-    if (empImage) formData.append("empImage", empImage);  
-    if (empPanCard) formData.append("empPancard", empPanCard);
 
+    // Append image and pan card only if selected
+    if (empImage) {
+      formData.append("empImage", empImage);
+    }
+
+    if (empPanCard) {
+      formData.append("empPancard", empPanCard);
+    }
+
+    // Set API endpoint and method based on whether we're updating or creating a new employee
     const apiEndpoint = empID
-      ? `http://localhost:9090/api/v1/editEmployee/${empID}`
-      : "http://localhost:9090/api/v1/saveEmployee";
+      ? `http://localhost:9090/api/v1/editEmployee/${empID}` // Endpoint for updating
+      : "http://localhost:9090/api/v1/saveEmployee"; // Endpoint for creating
 
     const requestMethod = empID ? axios.put : axios.post;
 
+    // Making the API request to save or update the employee data
     requestMethod(apiEndpoint, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     })
       .then((response) => {
-        alert("Employee data saved successfully.");
-        navigate("/viewEmployees");
+        alert(
+          empID
+            ? "Employee updated successfully."
+            : "Employee created successfully."
+        );
+        navigate("/viewEmployees"); // Redirect to employee list after success
       })
       .catch((error) => {
         console.error("Error submitting employee data:", error);
@@ -125,11 +148,17 @@ const EmployeeEnrollment = () => {
           <label className="form-label">First Name</label>
           <input
             type="text"
-            className={`form-control ${errors.empFirstName ? "is-invalid" : ""}`}
-            {...register("empFirstName", { required: "First name is required" })}
+            className={`form-control ${
+              errors.empFirstName ? "is-invalid" : ""
+            }`}
+            {...register("empFirstName", {
+              required: "First name is required",
+            })}
           />
           {errors.empFirstName && (
-            <div className="invalid-feedback">{errors.empFirstName.message}</div>
+            <div className="invalid-feedback">
+              {errors.empFirstName.message}
+            </div>
           )}
         </div>
 
@@ -137,7 +166,9 @@ const EmployeeEnrollment = () => {
           <label className="form-label">Middle Name</label>
           <input
             type="text"
-            className={`form-control ${errors.empMiddleName ? "is-invalid" : ""}`}
+            className={`form-control ${
+              errors.empMiddleName ? "is-invalid" : ""
+            }`}
             {...register("empMiddleName")}
           />
         </div>
@@ -216,10 +247,18 @@ const EmployeeEnrollment = () => {
             onChange={onSelectEmpImage}
           />
           {empImage && (
-            <img src={`data:image/jpeg;base64,${empImage}`} alt="Employee Image" />
+            <img
+              src={`data:image/jpeg;base64,${empImage}`}
+              alt="Employee Image"
+              style={{
+                margin: "10px",
+                width: "150px",
+                height: "100px",
+                objectFit: "cover",
+              }}
+            />
           )}
         </div>
-
 
         <div className="mb-3">
           <label className="form-label">Upload Pan Card</label>
@@ -229,7 +268,16 @@ const EmployeeEnrollment = () => {
             onChange={onSelectPanCard}
           />
           {empPanCard && (
-            <img src={`data:image/jpeg;base64,${empPanCard}`} alt="Pan Card" />
+            <img
+              src={`data:image/jpeg;base64,${empPanCard}`}
+              alt="Pan Card"
+              style={{
+                margin: "10px",
+                width: "150px",
+                height: "100px",
+                objectFit: "cover",
+              }}
+            />
           )}
         </div>
 
