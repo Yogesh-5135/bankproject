@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const EmployeeEnrollmentForm = () => {
+const EmployeeEnrollment = () => {
   const { empID } = useParams();
   const navigate = useNavigate();
   const {
@@ -15,36 +15,70 @@ const EmployeeEnrollmentForm = () => {
     reset,
   } = useForm();
 
-  const [employee, setEmployee] = useState(null); // Local state to store the employee data
+  const [empImage, setEmpImage] = useState(null);
+  const [empPanCard, setEmpPanCard] = useState(null);
 
-  useEffect(() => {
+  const getEditData = () => {
     if (empID) {
-      // Fetch employee data if empID is present (for editing scenario)
       axios
         .get(`http://localhost:9898/api/v5/getAdmin/${empID}`)
         .then((response) => {
-          const employeeData = response.data; // Store the employee data in local state
-          setEmployee(employeeData);
+          const employeeData = response.data;
+          const formFields = [
+            'empFirstName', 'empMiddleName', 'empLastName', 
+            'empEmail', 'empSalary', 'empAge', 'userType'
+          ];
 
-          // Manually update form fields using setValue after employee data is fetched
-          setValue("empFirstName", employeeData.empFirstName);
-          setValue("empMiddleName", employeeData.empMiddleName);
-          setValue("empLastName", employeeData.empLastName);
-          setValue("empEmail", employeeData.empEmail);
-          setValue("empSalary", employeeData.empSalary);
-          setValue("empAge", employeeData.empAge);
-          setValue("userType", employeeData.userType);
+          for (let prop in employeeData) {
+            if (formFields.includes(prop)) {
+              setValue(prop, employeeData[prop]);
+            }
+            else if (prop === 'empImage') {
+              setEmpImage(employeeData[prop]);
+            } else if (prop === 'empPancard') {
+              setEmpPanCard(employeeData[prop]);
+            }
+          }
         })
-        .catch((error) =>
-          console.error("Error fetching employee data:", error)
-        );
+        .catch((error) => {
+          console.error("Error fetching employee data:", error);
+        });
     }
-  }, [empID, setValue]);
+  };
+
+  useEffect(() => {
+    if (!empID) {
+      reset();
+    } else {
+      getEditData();
+    }
+  }, [empID, reset]);
+
+  const onSelectEmpImage = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEmpImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const onSelectPanCard = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEmpPanCard(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const onSubmit = (data) => {
     const formData = new FormData();
-
-    const info = {
+    const employeeInfo = {
       empFirstName: data.empFirstName,
       empMiddleName: data.empMiddleName,
       empLastName: data.empLastName,
@@ -54,17 +88,16 @@ const EmployeeEnrollmentForm = () => {
       userType: data.userType,
     };
 
-    formData.append("info", JSON.stringify(info));
-    formData.append("empImage", data.empImage[0]);
-    formData.append("empPancard", data.empPancard[0]);
+    formData.append("info", JSON.stringify(employeeInfo));
+    if (empImage) formData.append("empImage", empImage);  
+    if (empPanCard) formData.append("empPancard", empPanCard);
 
     const apiEndpoint = empID
-      ? `http://localhost:9898/api/v5/editAdmin/${empID}` // For edit
-      : "http://localhost:9898/api/v5/saveAdmin"; // For new employee creation
+      ? `http://localhost:9090/api/v1/editEmployee/${empID}`
+      : "http://localhost:9090/api/v1/saveEmployee";
 
     const requestMethod = empID ? axios.put : axios.post;
 
-    // Send the request to the backend
     requestMethod(apiEndpoint, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -72,7 +105,7 @@ const EmployeeEnrollmentForm = () => {
     })
       .then((response) => {
         alert("Employee data saved successfully.");
-        navigate("/viewEmployees"); // Redirect to employee list after success
+        navigate("/viewEmployees");
       })
       .catch((error) => {
         console.error("Error submitting employee data:", error);
@@ -92,17 +125,11 @@ const EmployeeEnrollmentForm = () => {
           <label className="form-label">First Name</label>
           <input
             type="text"
-            className={`form-control ${
-              errors.empFirstName ? "is-invalid" : ""
-            }`}
-            {...register("empFirstName", {
-              required: "First name is required",
-            })}
+            className={`form-control ${errors.empFirstName ? "is-invalid" : ""}`}
+            {...register("empFirstName", { required: "First name is required" })}
           />
           {errors.empFirstName && (
-            <div className="invalid-feedback">
-              {errors.empFirstName.message}
-            </div>
+            <div className="invalid-feedback">{errors.empFirstName.message}</div>
           )}
         </div>
 
@@ -110,9 +137,7 @@ const EmployeeEnrollmentForm = () => {
           <label className="form-label">Middle Name</label>
           <input
             type="text"
-            className={`form-control ${
-              errors.empMiddleName ? "is-invalid" : ""
-            }`}
+            className={`form-control ${errors.empMiddleName ? "is-invalid" : ""}`}
             {...register("empMiddleName")}
           />
         </div>
@@ -188,22 +213,22 @@ const EmployeeEnrollmentForm = () => {
           <input
             type="file"
             className={`form-control ${errors.empImage ? "is-invalid" : ""}`}
-            {...register("empImage")}
+            onChange={onSelectEmpImage}
           />
-          {errors.empImage && (
-            <div className="invalid-feedback">{errors.empImage.message}</div>
+          {empImage && (
+            <img src={`data:image/jpeg;base64,${empImage}`} alt="Employee Image" />
           )}
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Upload Pancard</label>
+          <label className="form-label">Upload Pan Card</label>
           <input
             type="file"
-            className={`form-control ${errors.empPancard ? "is-invalid" : ""}`}
-            {...register("empPancard")}
+            className={`form-control ${errors.empPanCard ? "is-invalid" : ""}`}
+            onChange={onSelectPanCard}
           />
-          {errors.empPancard && (
-            <div className="invalid-feedback">{errors.empPancard.message}</div>
+          {empPanCard && (
+            <img src={`data:image/jpeg;base64,${empPanCard}`} alt="Pan Card" />
           )}
         </div>
 
@@ -215,4 +240,4 @@ const EmployeeEnrollmentForm = () => {
   );
 };
 
-export default EmployeeEnrollmentForm;
+export default EmployeeEnrollment;

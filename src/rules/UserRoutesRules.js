@@ -11,7 +11,7 @@ export const userRoutes = [
   {
     ADMIN: [
       { path: "add-employee", component: <EmployeeEnrollment /> },
-      { path: "add-employee/:id", component: <EmployeeEnrollment /> },
+      { path: "add-employee/:empID", component: <EmployeeEnrollment /> },
       { path: "view-employee", component: <ViewAllEmployees /> },
     ],
     CRM: [
