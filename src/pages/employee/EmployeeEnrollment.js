@@ -220,6 +220,7 @@ const EmployeeEnrollment = () => {
           )}
         </div>
 
+
         <div className="mb-3">
           <label className="form-label">Upload Pan Card</label>
           <input
