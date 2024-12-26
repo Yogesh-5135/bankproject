@@ -8,7 +8,9 @@ export default function AcceptedEnquiries() {
 
   const fetchEnquiries = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/api/v1/getAllApprovedCustomer");
+      const response = await axios.get(
+        "http://localhost:9090/api/v1/getAllApprovedCustomer"
+      );
       setEnquiries(response.data);
       setLoading(false);
     } catch (error) {
@@ -39,12 +41,11 @@ export default function AcceptedEnquiries() {
             <tr>
               <th>Customer ID</th>
               <th>Name</th>
-              <th>Username</th>
-              <th>Password</th>
               <th>Age</th>
               <th>Email</th>
               <th>Mobile No</th>
               <th>PAN Card</th>
+              <th>Cibil Score</th>
               <th>Enquiry Status</th>
             </tr>
           </thead>
@@ -53,12 +54,11 @@ export default function AcceptedEnquiries() {
               <tr key={enquiry.customerid}>
                 <td>{enquiry.customerid}</td>
                 <td>{enquiry.name}</td>
-                <td>{enquiry.username}</td>
-                <td>{enquiry.password}</td>
                 <td>{enquiry.age}</td>
                 <td>{enquiry.email}</td>
                 <td>{enquiry.mobileno}</td>
                 <td>{enquiry.pancard}</td>
+                <td>{enquiry.cibil.cibilscore}</td>
                 <td>{enquiry.enquiryStatus}</td>
               </tr>
             ))}

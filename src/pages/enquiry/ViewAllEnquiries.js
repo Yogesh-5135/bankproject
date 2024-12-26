@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function ViewAllEnquiries() {
   const [enquiries, setEnquiries] = useState([]);
@@ -8,7 +8,9 @@ export default function ViewAllEnquiries() {
 
   const fetchEnquiries = async () => {
     try {
-      const response = await axios.get('http://localhost:9090/api/v1/getAllCustomer');
+      const response = await axios.get(
+        "http://localhost:9090/api/v1/getAllCustomer"
+      );
       setEnquiries(response.data);
       setLoading(false);
     } catch (error) {
@@ -38,12 +40,11 @@ export default function ViewAllEnquiries() {
             <tr>
               <th>Customer ID</th>
               <th>Name</th>
-              <th>Username</th>
-              <th>Password</th>
               <th>Age</th>
               <th>Email</th>
               <th>Mobile No</th>
               <th>PAN Card</th>
+              <th>Cibil Score</th>
               <th>Enquiry Status</th>
             </tr>
           </thead>
@@ -52,12 +53,11 @@ export default function ViewAllEnquiries() {
               <tr key={enquiry.customerid}>
                 <td>{enquiry.customerid}</td>
                 <td>{enquiry.name}</td>
-                <td>{enquiry.username}</td>
-                <td>{enquiry.password}</td>
                 <td>{enquiry.age}</td>
                 <td>{enquiry.email}</td>
                 <td>{enquiry.mobileno}</td>
                 <td>{enquiry.pancard}</td>
+                <td>{enquiry.cibil.cibilscore}</td>
                 <td>{enquiry.enquiryStatus}</td>
               </tr>
             ))}
