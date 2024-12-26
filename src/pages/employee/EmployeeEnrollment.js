@@ -1,14 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const EmployeeEnrollmentForm = () => {
+  const { empID } = useParams();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    reset,
   } = useForm();
+
+  const [employee, setEmployee] = useState(null); // Local state to store the employee data
+
+  useEffect(() => {
+    if (empID) {
+      // Fetch employee data if empID is present (for editing scenario)
+      axios
+        .get(`http://localhost:9898/api/v5/getAdmin/${empID}`)
+        .then((response) => {
+          const employeeData = response.data; // Store the employee data in local state
+          setEmployee(employeeData);
+
+          // Manually update form fields using setValue after employee data is fetched
+          setValue("empFirstName", employeeData.empFirstName);
+          setValue("empMiddleName", employeeData.empMiddleName);
+          setValue("empLastName", employeeData.empLastName);
+          setValue("empEmail", employeeData.empEmail);
+          setValue("empSalary", employeeData.empSalary);
+          setValue("empAge", employeeData.empAge);
+          setValue("userType", employeeData.userType);
+        })
+        .catch((error) =>
+          console.error("Error fetching employee data:", error)
+        );
+    }
+  }, [empID, setValue]);
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -27,28 +58,35 @@ const EmployeeEnrollmentForm = () => {
     formData.append("empImage", data.empImage[0]);
     formData.append("empPancard", data.empPancard[0]);
 
-    axios
-      .post("http://localhost:9898/api/v5/saveAdmin", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+    const apiEndpoint = empID
+      ? `http://localhost:9898/api/v5/editAdmin/${empID}` // For edit
+      : "http://localhost:9898/api/v5/saveAdmin"; // For new employee creation
+
+    const requestMethod = empID ? axios.put : axios.post;
+
+    // Send the request to the backend
+    requestMethod(apiEndpoint, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
       .then((response) => {
-        console.log("Employee data submitted successfully:", response.data);
-        alert("Employee added succesfully");
+        alert("Employee data saved successfully.");
+        navigate("/viewEmployees"); // Redirect to employee list after success
       })
       .catch((error) => {
         console.error("Error submitting employee data:", error);
+        alert("Error submitting employee data.");
       });
   };
 
   return (
     <div className="container mt-5">
-      <h2>Employee Enrollment Form</h2>
+      <h2>{empID ? "Edit Employee" : "Employee Enrollment Form"}</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="p-4 border rounded shadow"
-        style={{ height: "580px", overflowY: "auto" }}
+        style={{ height: "650px", overflowY: "auto" }}
       >
         <div className="mb-3">
           <label className="form-label">First Name</label>
@@ -170,7 +208,7 @@ const EmployeeEnrollmentForm = () => {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Submit
+          {empID ? "Update Employee" : "Submit"}
         </button>
       </form>
     </div>

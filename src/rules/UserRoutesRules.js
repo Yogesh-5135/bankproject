@@ -6,14 +6,13 @@ import FeedbackEnquiries from "../pages/enquiry/FeedbackEnquiries";
 import CreateCibil from "../pages/Cibil/CreateCibil";
 import GetVerifiedList from "../pages/Cibil/GetVerifiedList";
 
-
 export const userRoutes = [
   //0 index
   {
     ADMIN: [
       { path: "add-employee", component: <EmployeeEnrollment /> },
+      { path: "add-employee/:id", component: <EmployeeEnrollment /> },
       { path: "view-employee", component: <ViewAllEmployees /> },
-
     ],
     CRM: [
       { path: "view-accepted-enquiries", component: <AcceptedEnquiries /> },
@@ -25,6 +24,6 @@ export const userRoutes = [
       { path: "get-verified-list", component: <GetVerifiedList /> },
     ],
 
-    CM:[],
+    CM: [],
   },
 ];
