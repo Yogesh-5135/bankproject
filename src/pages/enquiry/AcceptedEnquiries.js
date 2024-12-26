@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-export default function ViewAllEnquiries() {
+export default function AcceptedEnquiries() {
   const [enquiries, setEnquiries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchEnquiries = async () => {
     try {
-      const response = await axios.get('http://localhost:9090/api/v1/getAllCustomer');
+      const response = await axios.get("http://localhost:9090/api/v1/getAllApprovedCustomer");
       setEnquiries(response.data);
       setLoading(false);
     } catch (error) {
-      setError(error.message);
+      console.error(error);
+      setError("Error: " + error.message);
       setLoading(false);
     }
   };
@@ -26,12 +27,12 @@ export default function ViewAllEnquiries() {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>{error}</div>;
   }
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-4">All Enquiries</h1>
+      <h1 className="text-center mb-4">All Approved Enquiries</h1>
       <div className="table-responsive">
         <table className="table table-bordered table-striped">
           <thead className="table-dark">

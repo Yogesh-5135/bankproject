@@ -35,6 +35,7 @@ const EmployeeEnrollmentForm = () => {
       })
       .then((response) => {
         console.log("Employee data submitted successfully:", response.data);
+        alert("Employee added succesfully");
       })
       .catch((error) => {
         console.error("Error submitting employee data:", error);

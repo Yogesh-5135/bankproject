@@ -9,9 +9,13 @@ export const userMenus = [
       { url: `${prefix}View-enquiries`, label: "View Enquiries" },
     ],
     CRM: [
-      { url: `${prefix}view-new-enquiries`, label: "Registerd Enquiries" },
+      { url: `${prefix}view-accepted-enquiries`, label: "Accepted Enquiries" },
       { url: `${prefix}view-enquiry-feedback`, label: "Feedback Enquiries" },
+      { url: `${prefix}view-all-enquiries`, label: "View All Enquiries" },
     ],
-    OE: [],
+    OE: [
+      { url: `${prefix}create-cibil`, label: "Check CIBIL" },
+      { url: `${prefix}get-verified-list`, label: "Get Verified List" },
+    ],
   },
 ];
