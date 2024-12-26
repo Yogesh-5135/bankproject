@@ -36,7 +36,7 @@ const ViewEmployeeTable = () => {
   };
 
   const handleEdit = (empID) => {
-    navigate(`/bankloan/add-employee/${empID}`);
+    navigate(`/bankloan/edit-employee/${empID}`);
   };
 
   const filteredEmployees = employees.filter((employee) =>

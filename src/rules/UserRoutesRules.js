@@ -5,13 +5,14 @@ import AcceptedEnquiries from "../pages/enquiry/AcceptedEnquiries";
 import FeedbackEnquiries from "../pages/enquiry/FeedbackEnquiries";
 import CreateCibil from "../pages/Cibil/CreateCibil";
 import GetVerifiedList from "../pages/Cibil/GetVerifiedList";
+import EditEmployeeForm from "../pages/employee/EditEmployeeForm";
 
 export const userRoutes = [
   //0 index
   {
     ADMIN: [
       { path: "add-employee", component: <EmployeeEnrollment /> },
-      { path: "add-employee/:empID", component: <EmployeeEnrollment /> },
+      { path: "edit-employee/:empID", component: <EditEmployeeForm /> },
       { path: "view-employee", component: <ViewAllEmployees /> },
     ],
     CRM: [

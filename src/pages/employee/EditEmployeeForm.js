@@ -1,16 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-const EmployeeEnrollmentForm = () => {
+const EditEmployeeForm = () => {
+  const { empID } = useParams();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
+
+  const [empImage, setEmpImage] = useState(null);
+  const [empPanCard, setEmpPanCard] = useState(null);
+
+  useEffect(() => {
+    if (empID) {
+      axios
+        .get(`http://localhost:9898/api/v5/getAdmin/${empID}`)
+        .then((response) => {
+          const employeeData = response.data;
+          const formFields = [
+            "empFirstName",
+            "empMiddleName",
+            "empLastName",
+            "empEmail",
+            "empSalary",
+            "empAge",
+            "userType",
+          ];
+
+          for (let prop in employeeData) {
+            if (formFields.includes(prop)) {
+              setValue(prop, employeeData[prop]);
+            } else if (prop === "empImage") {
+              setEmpImage(employeeData[prop]);
+            } else if (prop === "empPancard") {
+              setEmpPanCard(employeeData[prop]);
+            }
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching employee data:", error);
+          alert("Error fetching employee data.");
+        });
+    }
+  }, [empID, setValue]);
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -27,33 +65,32 @@ const EmployeeEnrollmentForm = () => {
 
     formData.append("info", JSON.stringify(employeeInfo));
 
-    if (data.empImage[0]) {
-      formData.append("empImage", data.empImage[0]);
+    if (empImage) {
+      formData.append("empImage", empImage);
     }
-
-    if (data.empPancard[0]) {
-      formData.append("empPancard", data.empPancard[0]);
+    if (empPanCard) {
+      formData.append("panCard", empPanCard);
     }
 
     axios
-      .post("http://localhost:9898/api/v5/saveAdmin", formData, {
+      .put(`http://localhost:9898/api/v5/editAdmin/${empID}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => {
-        alert("Employee added successfully.");
-        navigate("/bankloan/view-employee");
+        alert("Employee updated successfully.");
+        navigate("/viewEmployees");
       })
       .catch((error) => {
-        console.error("Error submitting employee data:", error);
-        alert("Error submitting employee data.");
+        console.error("Error updating employee data:", error);
+        alert("Error updating employee data.");
       });
   };
 
   return (
     <div className="container mt-5">
-      <h2>Employee Enrollment Form</h2>
+      <h2>Edit Employee Form</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="p-4 border rounded shadow"
@@ -159,12 +196,19 @@ const EmployeeEnrollmentForm = () => {
           <input
             type="file"
             className="form-control"
-            {...register("empImage", {
-              required: "Employee image is required",
-            })}
+            {...register("empImage")}
           />
-          {errors.empImage && (
-            <div className="invalid-feedback">{errors.empImage.message}</div>
+          {empImage && (
+            <img
+              src={`data:image/jpeg;base64,${empImage}`}
+              alt="Employee Image"
+              style={{
+                margin: "10px",
+                width: "150px",
+                height: "100px",
+                objectFit: "cover",
+              }}
+            />
           )}
         </div>
 
@@ -173,19 +217,28 @@ const EmployeeEnrollmentForm = () => {
           <input
             type="file"
             className="form-control"
-            {...register("empPancard", { required: "Pan card is required" })}
+            {...register("empPancard")}
           />
-          {errors.empPancard && (
-            <div className="invalid-feedback">{errors.empPancard.message}</div>
+          {empPanCard && (
+            <img
+              src={`data:image/jpeg;base64,${empPanCard}`}
+              alt="Pan Card"
+              style={{
+                margin: "10px",
+                width: "150px",
+                height: "100px",
+                objectFit: "cover",
+              }}
+            />
           )}
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Submit
+          Update Employee
         </button>
       </form>
     </div>
   );
 };
 
-export default EmployeeEnrollmentForm;
+export default EditEmployeeForm;
