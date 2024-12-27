@@ -26,6 +26,10 @@ export default function Login() {
         )
         .then((res) => {
           console.log(res.data);
+          if (res.data.enquiryStatus === "Closed") {
+            alert("Your account is closed. You cannot login.");
+            return;
+          }
           sessionStorage.setItem("user", JSON.stringify(res.data));
           navigate("/bankloan/customerlayout");
         })
