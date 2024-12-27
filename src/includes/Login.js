@@ -19,6 +19,17 @@ export default function Login() {
           navigate("/bankloan");
         })
         .catch((error) => alert(error.message));
+    } else {
+      axios
+        .get(
+          `http://localhost:9090/api/v1/getCustomer/${data.username}/${data.password}`
+        )
+        .then((res) => {
+          console.log(res.data);
+          sessionStorage.setItem("user", JSON.stringify(res.data));
+          navigate("/customerDashboard");
+        })
+        .catch((error) => alert(error.message));
     }
   };
 
@@ -44,7 +55,7 @@ export default function Login() {
             type="password"
             id="password"
             className="form-control"
-            {...register("password", { required: true })} // Validation rule for required field
+            {...register("password", { required: true })}
           />
         </div>
         <div className="form-group form-check">
