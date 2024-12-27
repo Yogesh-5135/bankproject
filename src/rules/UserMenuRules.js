@@ -6,7 +6,6 @@ export const userMenus = [
     ADMIN: [
       { url: `${prefix}add-employee`, label: "Add Employee" },
       { url: `${prefix}view-employee`, label: "View Employee" },
-      { url: `${prefix}View-enquiries`, label: "View Enquiries" },
     ],
     CRM: [
       { url: `${prefix}view-accepted-enquiries`, label: "Accepted Enquiries" },

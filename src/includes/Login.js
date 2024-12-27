@@ -45,7 +45,7 @@ export default function Login() {
         onSubmit={handleSubmit(saveData)}
         className="border p-4 rounded shadow-sm"
       >
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -54,7 +54,7 @@ export default function Login() {
             {...register("username", { required: true })}
           />
         </div>
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -70,13 +70,15 @@ export default function Login() {
             className="form-check-input"
             {...register("isStaff")}
           />
-          <label htmlFor="staff-checkbox" className="form-check-label">
+          <label htmlFor="staff-checkbox" className="form-check-label mb-3">
             Are you a staff member?
           </label>
         </div>
-        <button type="submit" className="btn btn-primary btn-block">
-          Login
-        </button>
+        <div className="d-flex justify-content-center">
+          <button type="submit" className="btn btn-primary btn-block">
+            Login
+          </button>
+        </div>
       </form>
     </div>
   );
