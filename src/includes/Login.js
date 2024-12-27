@@ -27,7 +27,7 @@ export default function Login() {
         .then((res) => {
           console.log(res.data);
           sessionStorage.setItem("user", JSON.stringify(res.data));
-          navigate("/customerDashboard");
+          navigate("/bankloan/customerlayout");
         })
         .catch((error) => alert(error.message));
     }
