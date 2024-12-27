@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Login() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
 
   const saveData = (data) => {
@@ -28,7 +28,7 @@ export default function Login() {
           console.log(res.data);
           if (res.data.enquiryStatus === "Closed") {
             alert("Your account is closed. You cannot login.");
-
+            reset();
             return;
           }
           sessionStorage.setItem("user", JSON.stringify(res.data));
