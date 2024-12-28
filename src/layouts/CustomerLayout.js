@@ -1,60 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import CustomerProfileNav from "../templates/CustomerProfileNav";
 
-export default function CustomerLayout() {
-  const [customer, setCustomer] = useState({});
-  const navigate = useNavigate();
+function CustomerLayout() {
+  const [loginEnquiry, setLoginEnquiry] = useState();
 
-  const getSessionData = () => {
-    const userJson = sessionStorage.getItem("user");
-    const user = JSON.parse(userJson);
-    setCustomer(user);
-  };
+  function getLoginEnquiry() {
+    const enquiryJSON = sessionStorage.getItem("user");
+    const enquiry = JSON.parse(enquiryJSON);
+    setLoginEnquiry(enquiry);
+  }
 
-  useEffect(() => {
-    getSessionData();
-  }, []);
-
-  const statusColor =
-    customer.enquiryStatus === "Approved for ApplyLoan"
-      ? "green"
-      : customer.enquiryStatus === "Rejected"
-      ? "red"
-      : customer.enquiryStatus === "Approved"
-      ? "lightblue"
-      : "white";
-
-  const reloadStatus = () => {
-    getSessionData();
-  };
-
-  const logout = () => {
-    sessionStorage.removeItem("user");
-    navigate("/");
-  };
+  useEffect(getLoginEnquiry, []);
 
   return (
     <div>
-      <header className="bg-dark text-white p-2 d-flex justify-content-between align-items-center">
-        <div>
-          <h1 className="fs-4">CustomerId: {customer.customerid}</h1>
-          <h1 className="fs-5" style={{ color: statusColor }}>
-            Status: {customer.enquiryStatus}
-          </h1>
-        </div>
-
-        <div>
-          <button onClick={reloadStatus} className="btn btn-warning m-2">
-            Reload
-          </button>
-          <button onClick={logout} className="btn btn-danger m-2">
-            Logout
-          </button>
-        </div>
-      </header>
-      <nav className="bg-dark text-white mt-2 ms-4 me-4">
-        <h1>Welcome</h1>
-      </nav>
+      <CustomerProfileNav enquiry={loginEnquiry} setEnquiry={setLoginEnquiry} />
     </div>
   );
 }
+
+export default CustomerLayout;
