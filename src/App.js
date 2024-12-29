@@ -14,6 +14,10 @@ function App() {
           <Route path="/" element={<ExternalLayout />} />
           <Route path="/visitors/*" element={<ExternalLayout />} />
           <Route path="/bankloan/*" element={<InternalLayout />} />
+          <Route
+            path="/bankloan/customerlayout/*"
+            element={<CustomerLayout />}
+          />
           <Route path="/bankloan/customerlayout" element={<CustomerLayout />} />
         </Routes>
       </Router>

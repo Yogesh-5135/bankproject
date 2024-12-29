@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function CustomerProfileNav({ enquiry, setEnquiry }) {
   const [statusColor, setStatusColor] = useState("white");
   const navigate = useNavigate();
+
   useEffect(() => {
     console.log(enquiry);
     if (enquiry) {
@@ -40,6 +41,7 @@ function CustomerProfileNav({ enquiry, setEnquiry }) {
       e.preventDefault();
     }
   };
+
   return (
     <div>
       <header className="bg-dark text-white p-2 d-flex justify-content-between align-items-center">
@@ -58,15 +60,45 @@ function CustomerProfileNav({ enquiry, setEnquiry }) {
           </button>
         </div>
       </header>
-      <nav className="ms-5 me-5 d-flex">
-        <Link className="btn btn-link">View Enquiry</Link>
-        <Link className="btn btn-dark" onClick={makeDisable} to={"apply loan"}>
+
+      <nav className="ms-5 me-5 mt-2 d-flex gap-3">
+        <Link
+          className="text-black text-decoration-none p-2 hover-effect"
+          to="view-enquiry"
+        >
+          View Enquiry
+        </Link>
+        <Link
+          className="text-black text-decoration-none p-2 hover-effect"
+          onClick={makeDisable}
+          to="apply-loan"
+        >
           Apply For Loan
         </Link>
-        <Link className="btn btn-link">View Loan Application</Link>
-        <Link className="btn btn-link">View Sanction</Link>
-        <Link className="btn btn-link">Pay EMI</Link>
-        <Link className="btn btn-link">EMI History</Link>
+        <Link
+          className="text-black text-decoration-none p-2 hover-effect"
+          to="view-loan-application"
+        >
+          View Loan Application
+        </Link>
+        <Link
+          className="text-black text-decoration-none p-2 hover-effect"
+          to="view-sanction"
+        >
+          View Sanction
+        </Link>
+        <Link
+          className="text-black text-decoration-none p-2 hover-effect"
+          to="pay-emi"
+        >
+          Pay EMI
+        </Link>
+        <Link
+          className="text-black text-decoration-none p-2 hover-effect"
+          to="emi-history"
+        >
+          EMI History
+        </Link>
       </nav>
     </div>
   );
