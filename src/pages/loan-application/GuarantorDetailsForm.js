@@ -20,6 +20,7 @@ const GuarantorDetailsForm = ({ onNext, onBack, loanid }) => {
       axios
         .post(`${baseURL}/saveGuarantor/${loanid}`, data)
         .then((response) => {
+          alert("Loan Application Successfully Submitted");
           reset();
           onNext();
         })
