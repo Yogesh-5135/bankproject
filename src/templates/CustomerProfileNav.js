@@ -64,14 +64,14 @@ function CustomerProfileNav({ enquiry, setEnquiry }) {
       <nav className="ms-5 me-5 mt-2 d-flex gap-3">
         <Link
           className="text-black text-decoration-none p-2 hover-effect"
-          to="view-enquiry"
+          to="/bankloan/customerlayout/view-enquiry"
         >
           View Enquiry
         </Link>
         <Link
           className="text-black text-decoration-none p-2 hover-effect"
           onClick={makeDisable}
-          to="apply-loan"
+          to="/bankloan/customerlayout/apply-loan"
         >
           Apply For Loan
         </Link>

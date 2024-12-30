@@ -65,11 +65,12 @@ const EditEmployeeForm = () => {
 
     formData.append("info", JSON.stringify(employeeInfo));
 
-    if (empImage) {
-      formData.append("empImage", empImage);
+    if (data.empImage[0]) {
+                      
+      formData.append("empImage", data.empImage[0]);
     }
-    if (empPanCard) {
-      formData.append("panCard", empPanCard);
+    if (data.empPancard[0]) {
+      formData.append("panCard", data.empPancard[0]);
     }
 
     axios
@@ -80,7 +81,7 @@ const EditEmployeeForm = () => {
       })
       .then((response) => {
         alert("Employee updated successfully.");
-        navigate("/viewEmployees");
+        navigate("/bankloan/view-employee");
       })
       .catch((error) => {
         console.error("Error updating employee data:", error);

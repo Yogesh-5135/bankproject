@@ -18,7 +18,7 @@ function App() {
             path="/bankloan/customerlayout/*"
             element={<CustomerLayout />}
           />
-          <Route path="/bankloan/customerlayout" element={<CustomerLayout />} />
+         
         </Routes>
       </Router>
     </div>

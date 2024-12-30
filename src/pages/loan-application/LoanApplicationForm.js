@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-const LoanApplicationForm = ({ onNext, patchenquiry }) => {
+const LoanApplicationForm = ({ onNext, enquiry }) => {
   const {
     register,
     handleSubmit,
@@ -13,12 +13,12 @@ const LoanApplicationForm = ({ onNext, patchenquiry }) => {
   const baseURL = "http://localhost:9090";
 
   useEffect(() => {
-    if (patchenquiry) {
-      setValue("customerName", patchenquiry.name);
-      setValue("customerMobileNumber", patchenquiry.mobileno);
-      setValue("customerEmail", patchenquiry.email);
+    if (enquiry) {
+      setValue("customerName", enquiry.name);
+      setValue("customerMobileNumber", enquiry.mobileno);
+      setValue("customerEmail", enquiry.email);
     }
-  }, [patchenquiry, setValue]);
+  }, [enquiry, setValue]);
 
   const onSubmitCreate = (data) => {
     axios

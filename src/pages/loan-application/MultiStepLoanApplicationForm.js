@@ -9,7 +9,7 @@ import DependentInformationForm from "./DependentInformationForm";
 const MultiStepLoanApplicationForm = ({ enquiry }) => {
   const [step, setStep] = useState(1);
   const [loanid, setLoanId] = useState(null);
-  const [patchenquiry] = useState(enquiry);
+
 
   const handleNext = (loanid) => {
     setLoanId(loanid);
@@ -24,7 +24,7 @@ const MultiStepLoanApplicationForm = ({ enquiry }) => {
   return (
     <div>
       {step === 1 && (
-        <LoanApplicationForm onNext={handleNext} enquiry={patchenquiry} />
+        <LoanApplicationForm onNext={handleNext} enquiry={enquiry}/>
       )}
       {step === 2 && (
         <DocumentUploadForm
