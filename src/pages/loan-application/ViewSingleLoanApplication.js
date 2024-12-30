@@ -2,22 +2,24 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const ViewSingleLoanApplication = () => {
+const ViewSingleLoanApplication = ({enquiry}) => {
   const [viewLoan, setViewLoan] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!enquiry?.customerid) return;
     axios
-      .get("http://localhost:9090/getSingleLoanApplication/1") 
+      .get(`http://localhost:9090/getSingleLoanApplication/${enquiry?.customerid}`) 
       .then((response) => {
         setViewLoan(response.data);
+        console.log(enquiry?.customerid)
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching loan application data:", error);
         setLoading(false);
       });
-  }, []);
+  }, [enquiry?.customerid]);
 
   if (loading) {
     return <div>Loading...</div>;
