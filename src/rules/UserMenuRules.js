@@ -21,6 +21,10 @@ export const userMenus = [
         url: `${prefix}view-all-loanapplications`, //credit limit generate,getMonthlyEmi,getIntRate,GetSanctionLetter
         label: "View All LoanApplications",
       },
+      {
+        url: `${prefix}view-saction-letter`, //credit limit generate,getMonthlyEmi,getIntRate,GetSanctionLetter
+        label: "View Sanction Letter",
+      },
     ],
     AH: [
       {

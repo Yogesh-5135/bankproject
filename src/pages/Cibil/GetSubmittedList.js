@@ -18,26 +18,24 @@ export default function GetSubmittedList() {
       });
   }, []);
 
-  // Handle individual checkbox change
   const handleCheckboxChange = (loanid, imageType) => {
     setSelectedCheckboxes((prevState) => {
       const userCheckboxes = prevState[loanid] || {};
-      userCheckboxes[imageType] = !userCheckboxes[imageType]; // Toggle checkbox
+      userCheckboxes[imageType] = !userCheckboxes[imageType];
       return {
         ...prevState,
-        [loanid]: userCheckboxes, // Update the checkbox state
+        [loanid]: userCheckboxes,
       };
     });
   };
 
-  // Handle Select All checkbox change
   const handleSelectAllChange = (loanid) => {
     const user = users.find((user) => user.loanid === loanid);
     if (user && user.allPersonalDocuments) {
       setSelectedCheckboxes((prevState) => {
         const allSelected = Object.keys(user.allPersonalDocuments).reduce(
           (acc, imageType) => {
-            acc[imageType] = true; // Select all checkboxes
+            acc[imageType] = true;
             return acc;
           },
           {}
@@ -50,11 +48,10 @@ export default function GetSubmittedList() {
     }
   };
 
-  // Check if all checkboxes are selected
   const isAllCheckboxesSelected = (loanid) => {
     const userCheckboxes = selectedCheckboxes[loanid] || {};
     const user = users.find((user) => user.loanid === loanid);
-    // Check if all checkboxes for this user are selected
+
     return (
       user &&
       Object.keys(user.allPersonalDocuments || {}).every(
@@ -63,7 +60,6 @@ export default function GetSubmittedList() {
     );
   };
 
-  // Put Loan status as verified (use PUT instead of DELETE)
   const updateLoanStatus = (loanid) => {
     axios
       .put(`http://localhost:9090/updateLoanStatusAsVerified/${loanid}`)
@@ -99,7 +95,6 @@ export default function GetSubmittedList() {
                 <td>{user.customerName}</td>
                 <td>{user.loanStatus}</td>
                 <td>
-                  {/* Select All Checkbox */}
                   <div>
                     <input
                       type="checkbox"
@@ -109,7 +104,6 @@ export default function GetSubmittedList() {
                     <label>Select All</label>
                   </div>
 
-                  {/* Images and Checkboxes arranged horizontally */}
                   <div
                     style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}
                   >
@@ -333,7 +327,7 @@ export default function GetSubmittedList() {
                   <button
                     className="btn btn-primary btn-sm mx-2"
                     onClick={() => updateLoanStatus(user.loanid)}
-                    disabled={!isAllCheckboxesSelected(user.loanid)} // Disable button if not all checkboxes are selected
+                    disabled={!isAllCheckboxesSelected(user.loanid)}
                   >
                     Verify
                   </button>

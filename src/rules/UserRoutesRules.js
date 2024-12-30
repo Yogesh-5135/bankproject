@@ -7,6 +7,7 @@ import GetVerifiedList from "../pages/Cibil/GetVerifiedList";
 import EditEmployeeForm from "../pages/employee/EditEmployeeForm";
 import GetSubmittedList from "../pages/Cibil/GetSubmittedList";
 import ViewAllLoanApplications from "../pages/sanction/ViewAllLoanApplications";
+import ViewSanctionLetter from "../pages/sanction/ViewSanctionLetter";
 
 export const userRoutes = [
   //0 index
@@ -30,6 +31,10 @@ export const userRoutes = [
       {
         path: "view-all-loanapplications",
         component: <ViewAllLoanApplications />,
+      },
+      {
+        path: "view-saction-letter",
+        component: <ViewSanctionLetter />,
       },
     ],
 
