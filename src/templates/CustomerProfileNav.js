@@ -77,25 +77,25 @@ function CustomerProfileNav({ enquiry, setEnquiry }) {
         </Link>
         <Link
           className="text-black text-decoration-none p-2 hover-effect"
-          to="view-loan-application"
+          to="/bankloan/customerlayout/view-loan-application"
         >
           View Loan Application
         </Link>
         <Link
           className="text-black text-decoration-none p-2 hover-effect"
-          to="view-sanction"
+          to="/bankloan/customerlayout/view-sanction"
         >
           View Sanction
         </Link>
         <Link
           className="text-black text-decoration-none p-2 hover-effect"
-          to="pay-emi"
+          to="/bankloan/customerlayout/pay-emi"
         >
           Pay EMI
         </Link>
         <Link
           className="text-black text-decoration-none p-2 hover-effect"
-          to="emi-history"
+          to="/bankloan/customerlayout/emi-history"
         >
           EMI History
         </Link>

@@ -3,6 +3,7 @@ import CustomerProfileNav from "../templates/CustomerProfileNav";
 import { Route, Routes } from "react-router-dom";
 import ViewEnquiry from "../pages/enquiry/ViewEnquiry";
 import MultiStepLoanApplicationForm from "../pages/loan-application/MultiStepLoanApplicationForm";
+import ViewSingleLoanApplication from "../pages/loan-application/ViewSingleLoanApplication";
 
 function CustomerLayout() {
   const [loginEnquiry, setLoginEnquiry] = useState();
@@ -26,6 +27,10 @@ function CustomerLayout() {
         <Route
           path="apply-loan"
           element={<MultiStepLoanApplicationForm enquiry={loginEnquiry} />}
+        />
+         <Route
+          path="view-loan-application"
+          element={<ViewSingleLoanApplication enquiry={loginEnquiry} />}
         />
       </Routes>
     </div>
