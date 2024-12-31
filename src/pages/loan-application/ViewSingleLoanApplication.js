@@ -35,333 +35,364 @@ const ViewSingleLoanApplication = ({ enquiry }) => {
     <div className="container mt-5">
       <h2>Loan Application Details</h2>
 
-      <div className="loan-details">
-        {/* Loan Application Details */}
-        <div className="loan-card">
-          <h3>Loan Application</h3>
-          <div className="row mb-3">
-            <div className="col-4">
+      {/* Loan Application Details Table */}
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th colSpan="2" className="text-center">
+              Loan Application
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
               <strong>Loan ID:</strong>
-            </div>
-            <div className="col-8">{viewLoan.loanid}</div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.loanid}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Customer Name:</strong>
-            </div>
-            <div className="col-8">{viewLoan.customerName}</div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.customerName}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Date of Birth:</strong>
-            </div>
-            <div className="col-8">{viewLoan.dob}</div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.dob}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Customer Age:</strong>
-            </div>
-            <div className="col-8">{viewLoan.customerAge}</div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.customerAge}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Loan Status:</strong>
-            </div>
-            <div className="col-8">{viewLoan.loanStatus}</div>
-          </div>
-        </div>
+            </td>
+            <td>{viewLoan.loanStatus}</td>
+          </tr>
+        </tbody>
+      </table>
 
-        {/* Customer Contact Details */}
-        <div className="loan-card mt-4">
-          <h3>Customer Contact</h3>
-          <div className="row mb-3">
-            <div className="col-4">
+      {/* Customer Contact Details Table */}
+      <table className="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th colSpan="2" className="text-center">
+              Customer Contact
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
               <strong>Email:</strong>
-            </div>
-            <div className="col-8">{viewLoan.customerEmail}</div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.customerEmail}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Mobile Number:</strong>
-            </div>
-            <div className="col-8">{viewLoan.customerMobileNumber}</div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.customerMobileNumber}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Additional Mobile:</strong>
-            </div>
-            <div className="col-8">
-              {viewLoan.customerAdditionalMobileNumber}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.customerAdditionalMobileNumber}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Address:</strong>
-            </div>
-            <div className="col-8">
+            </td>
+            <td>
               {viewLoan.customerAddress.permanentAddress.houseNumber},{" "}
               {viewLoan.customerAddress.permanentAddress.streetName},{" "}
               {viewLoan.customerAddress.permanentAddress.cityname}
-            </div>
-          </div>
-        </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-        {/* Account Details */}
-        <div className="loan-card mt-4">
-          <h3>Account Details</h3>
-          <div className="row mb-3">
-            <div className="col-4">
+      {/* Account Details Table */}
+      <table className="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th colSpan="2" className="text-center">
+              Account Details
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
               <strong>Account Type:</strong>
-            </div>
-            <div className="col-8">{viewLoan.accountdetails.accountType}</div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.accountdetails.accountType}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Account Holder Name:</strong>
-            </div>
-            <div className="col-8">
-              {viewLoan.accountdetails.accountHolderName}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.accountdetails.accountHolderName}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Account Balance:</strong>
-            </div>
-            <div className="col-8">
-              {viewLoan.accountdetails.accountBalance}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.accountdetails.accountBalance}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Account Status:</strong>
-            </div>
-            <div className="col-8">{viewLoan.accountdetails.accountStatus}</div>
-          </div>
-        </div>
+            </td>
+            <td>{viewLoan.accountdetails.accountStatus}</td>
+          </tr>
+        </tbody>
+      </table>
 
-        {/* Guarantor Details */}
-        <div className="loan-card mt-4">
-          <h3>Guarantor Details</h3>
-          <div className="row mb-3">
-            <div className="col-4">
-              <strong>Name:</strong>
-            </div>
-            <div className="col-8">
-              {viewLoan.gurantordetails.guarantorName}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+      {/* Guarantor Details Table */}
+      <table className="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th colSpan="2" className="text-center">
+              Guarantor Details
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Guarantor Name:</strong>
+            </td>
+            <td>{viewLoan.gurantordetails.guarantorName}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Relationship with Customer:</strong>
-            </div>
-            <div className="col-8">
+            </td>
+            <td>
               {viewLoan.gurantordetails.guarantorRelationshipwithCustomer}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+          </tr>
+          <tr>
+            <td>
               <strong>Mobile Number:</strong>
-            </div>
-            <div className="col-8">
-              {viewLoan.gurantordetails.guarantorMobileNumber}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
-              <strong>Adhar Card Number:</strong>
-            </div>
-            <div className="col-8">
-              {viewLoan.gurantordetails.guarantorAdharCardNo}
-            </div>
-          </div>
-        </div>
+            </td>
+            <td>{viewLoan.gurantordetails.guarantorMobileNumber}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Aadhar Card Number:</strong>
+            </td>
+            <td>{viewLoan.gurantordetails.guarantorAdharCardNo}</td>
+          </tr>
+        </tbody>
+      </table>
 
-        {/* Dependent Information */}
-        <div className="loan-card mt-4">
-          <h3>Dependent Information</h3>
-          <div className="row mb-3">
-            <div className="col-4">
+      {/* Dependent Information Table */}
+      <table className="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th colSpan="2" className="text-center">
+              Dependent Information
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
               <strong>Family Members:</strong>
-            </div>
-            <div className="col-8">
-              {viewLoan.dependentInforamtion.noOfFamilyMember}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.dependentInforamtion.noOfFamilyMember}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Children:</strong>
-            </div>
-            <div className="col-8">
-              {viewLoan.dependentInforamtion.noOfChild}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.dependentInforamtion.noOfChild}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Marital Status:</strong>
-            </div>
-            <div className="col-8">
-              {viewLoan.dependentInforamtion.maritalStatus}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
+            </td>
+            <td>{viewLoan.dependentInforamtion.maritalStatus}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>Family Income:</strong>
-            </div>
-            <div className="col-8">
-              {viewLoan.dependentInforamtion.familyIncome}
-            </div>
-          </div>
-        </div>
+            </td>
+            <td>{viewLoan.dependentInforamtion.familyIncome}</td>
+          </tr>
+        </tbody>
+      </table>
 
-        {/* Personal Documents */}
-        <div className="loan-card mt-4">
-          <h3>Personal Documents</h3>
-
-          {/* Address Proof */}
+      {/* Personal Documents Table */}
+      <table className="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th colSpan="2" className="text-center">
+              Personal Documents
+            </th>
+          </tr>
+        </thead>
+        <tbody>
           {viewLoan.allPersonalDocuments?.addressProof && (
-            <div className="row mb-3">
-              <div className="col-4">
+            <tr>
+              <td>
                 <strong>Address Proof:</strong>
-              </div>
-              <div className="col-8">
+              </td>
+              <td>
                 <img
                   src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.addressProof}`}
                   alt="Address Proof"
                   style={{ width: "50px", height: "50px", objectFit: "cover" }}
                 />
-              </div>
-            </div>
+              </td>
+            </tr>
           )}
 
-          {/* PAN Card */}
           {viewLoan.allPersonalDocuments?.panCard && (
-            <div className="row mb-3">
-              <div className="col-4">
+            <tr>
+              <td>
                 <strong>PAN Card:</strong>
-              </div>
-              <div className="col-8">
+              </td>
+              <td>
                 <img
                   src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.panCard}`}
                   alt="PAN Card"
                   style={{ width: "50px", height: "50px", objectFit: "cover" }}
                 />
-              </div>
-            </div>
-          )}
-
-          {/* Income Tax */}
-          {viewLoan.allPersonalDocuments?.IncomeTax && (
-            <div className="row mb-3">
-              <div className="col-4">
-                <strong>Income Tax:</strong>
-              </div>
-              <div className="col-8">
-                <img
-                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.IncomeTax}`}
-                  alt="Income Tax"
-                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Aadhar Card */}
-          {viewLoan.allPersonalDocuments?.addharCard && (
-            <div className="row mb-3">
-              <div className="col-4">
-                <strong>Aadhar Card:</strong>
-              </div>
-              <div className="col-8">
-                <img
-                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.addharCard}`}
-                  alt="Aadhar Card"
-                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Photo */}
-          {viewLoan.allPersonalDocuments?.photo && (
-            <div className="row mb-3">
-              <div className="col-4">
-                <strong>Photo:</strong>
-              </div>
-              <div className="col-8">
-                <img
-                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.photo}`}
-                  alt="Photo"
-                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Signature */}
-          {viewLoan.allPersonalDocuments?.signature && (
-            <div className="row mb-3">
-              <div className="col-4">
-                <strong>Signature:</strong>
-              </div>
-              <div className="col-8">
-                <img
-                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.signature}`}
-                  alt="Signature"
-                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Bank Cheque */}
-          {viewLoan.allPersonalDocuments?.bankCheque && (
-            <div className="row mb-3">
-              <div className="col-4">
-                <strong>Bank Cheque:</strong>
-              </div>
-              <div className="col-8">
-                <img
-                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.bankCheque}`}
-                  alt="Bank Cheque"
-                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
-                />
-              </div>
-            </div>
+              </td>
+            </tr>
           )}
 
           {viewLoan.allPersonalDocuments?.incomeTax && (
-            <div className="row mb-3">
-              <div className="col-4">
+            <tr>
+              <td>
                 <strong>Income Tax:</strong>
-              </div>
-
-              <div className="col-8">
+              </td>
+              <td>
                 <img
                   src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.incomeTax}`}
                   alt="Income Tax"
                   style={{ width: "50px", height: "50px", objectFit: "cover" }}
                 />
-              </div>
-            </div>
+              </td>
+            </tr>
           )}
 
-          {/* Salary Slips */}
+          {viewLoan.allPersonalDocuments?.adharCard && (
+            <tr>
+              <td>
+                <strong>Aadhar Card:</strong>
+              </td>
+              <td>
+                <img
+                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.adharCard}`}
+                  alt="Aadhar Card"
+                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                />
+              </td>
+            </tr>
+          )}
+
+          {viewLoan.allPersonalDocuments?.photo && (
+            <tr>
+              <td>
+                <strong>Photo:</strong>
+              </td>
+              <td>
+                <img
+                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.photo}`}
+                  alt="Photo"
+                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                />
+              </td>
+            </tr>
+          )}
+
+          {viewLoan.allPersonalDocuments?.signature && (
+            <tr>
+              <td>
+                <strong>Signature:</strong>
+              </td>
+              <td>
+                <img
+                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.signature}`}
+                  alt="Signature"
+                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                />
+              </td>
+            </tr>
+          )}
+
+          {viewLoan.allPersonalDocuments?.bankCheque && (
+            <tr>
+              <td>
+                <strong>Bank Cheque:</strong>
+              </td>
+              <td>
+                <img
+                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.bankCheque}`}
+                  alt="Bank Cheque"
+                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                />
+              </td>
+            </tr>
+          )}
+
           {viewLoan.allPersonalDocuments?.salarySlips && (
-            <div className="row mb-3">
-              <div className="col-4">
+            <tr>
+              <td>
                 <strong>Salary Slips:</strong>
-              </div>
-              <div className="col-8">
+              </td>
+              <td>
                 <img
                   src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.salarySlips}`}
                   alt="Salary Slips"
                   style={{ width: "50px", height: "50px", objectFit: "cover" }}
                 />
-              </div>
-            </div>
+              </td>
+            </tr>
           )}
-        </div>
-      </div>
+
+          {viewLoan.allPersonalDocuments?.bankStatement && (
+            <tr>
+              <td>
+                <strong>Bank Statement:</strong>
+              </td>
+              <td>
+                <img
+                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.bankStatement}`}
+                  alt="Bank Statement"
+                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                />
+              </td>
+            </tr>
+          )}
+
+          {viewLoan.allPersonalDocuments?.propertyDocument && (
+            <tr>
+              <td>
+                <strong>Property Document:</strong>
+              </td>
+              <td>
+                <img
+                  src={`data:image/jpeg;base64,${viewLoan.allPersonalDocuments.propertyDocument}`}
+                  alt="Property Document"
+                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                />
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

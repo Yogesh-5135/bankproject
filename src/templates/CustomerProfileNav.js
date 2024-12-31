@@ -42,6 +42,19 @@ function CustomerProfileNav({ enquiry, setEnquiry }) {
     }
   };
 
+  const makeDisableForViewSanction = (e) => {
+    const status = [
+      "Verified",
+      "CreditLimitGenerated",
+      "GettingROI",
+      "MonthlyEmiGenrated",
+      "SanctionLetterGenerated",
+    ];
+    if (status.includes(enquiry.enquiryStatus)) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <div>
       <header className="bg-dark text-white p-2 d-flex justify-content-between align-items-center">
@@ -83,6 +96,7 @@ function CustomerProfileNav({ enquiry, setEnquiry }) {
         </Link>
         <Link
           className="text-black text-decoration-none p-2 hover-effect"
+          onClick={makeDisableForViewSanction}
           to="/bankloan/customerlayout/view-sanction"
         >
           View Sanction
