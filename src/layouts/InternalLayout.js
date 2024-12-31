@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import SideNav from "../templates/SideNav";
 import "../styles/InternalLayout.css";
 import { userRoutes } from "../rules/UserRoutesRules";
+import Data from "../pages/employee/Data";
+import EnquiryStatus from "../pages/employee/EnquiryStatus";
 
 function InternalLayout() {
   const [employee, setEmployee] = useState({});
@@ -33,6 +35,9 @@ function InternalLayout() {
                 />
               ))}
           </Routes>
+          
+          <Data />
+          <EnquiryStatus/>
         </div>
       </div>
     </div>
