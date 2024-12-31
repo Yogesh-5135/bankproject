@@ -8,6 +8,8 @@ import EditEmployeeForm from "../pages/employee/EditEmployeeForm";
 import GetSubmittedList from "../pages/Cibil/GetSubmittedList";
 import ViewAllLoanApplications from "../pages/sanction/ViewAllLoanApplications";
 import ViewSanctionLetter from "../pages/sanction/ViewSanctionLetter";
+import ViewAllAccepted from "../pages/ledger/ViewAllAccepted";
+import CalculateLedger from "../pages/ledger/CalculateLedger";
 
 export const userRoutes = [
   //0 index
@@ -33,15 +35,19 @@ export const userRoutes = [
         component: <ViewAllLoanApplications />,
       },
       {
-        path: "view-saction-letter",
+        path: "view-sanction-letter",
         component: <ViewSanctionLetter />,
       },
     ],
 
     AH: [
       {
-        path: "view-all-loanapplications",
-        component: <ViewAllLoanApplications />,
+        path: "view-all-accepted",
+        component: <ViewAllAccepted />,
+      },
+      {
+        path: "calculate-ledger",
+        component: <CalculateLedger />,
       },
     ],
   },

@@ -72,7 +72,7 @@ export default function ViewAllLoanApplications() {
       )
       .then((response) => {
         const sanctionDetails = response.data;
-        navigate("/bankloan/view-saction-letter", {
+        navigate("/bankloan/view-sanction-letter", {
           state: { sanction: sanctionDetails },
         });
       })

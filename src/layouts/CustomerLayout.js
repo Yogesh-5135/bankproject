@@ -5,6 +5,8 @@ import ViewEnquiry from "../pages/enquiry/ViewEnquiry";
 import MultiStepLoanApplicationForm from "../pages/loan-application/MultiStepLoanApplicationForm";
 import ViewSingleLoanApplication from "../pages/loan-application/ViewSingleLoanApplication";
 import ViewSanction from "../pages/sanction/ViewSanction";
+import PayEmi from "../pages/ledger/PayEmi";
+import EmiHistory from "../pages/ledger/EmiHistory";
 
 function CustomerLayout() {
   const [loginEnquiry, setLoginEnquiry] = useState();
@@ -36,6 +38,11 @@ function CustomerLayout() {
         <Route
           path="view-sanction"
           element={<ViewSanction enquiry={loginEnquiry} />}
+        />
+        <Route path="pay-emi" element={<PayEmi enquiry={loginEnquiry} />} />
+        <Route
+          path="emi-history"
+          element={<EmiHistory enquiry={loginEnquiry} />}
         />
       </Routes>
     </div>

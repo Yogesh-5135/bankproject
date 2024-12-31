@@ -22,14 +22,18 @@ export const userMenus = [
         label: "View All LoanApplications",
       },
       {
-        url: `${prefix}view-saction-letter`, //credit limit generate,getMonthlyEmi,getIntRate,GetSanctionLetter
-        label: "View Sanction Letter",
+        url: `${prefix}view-sanction-letter`, //credit limit generate,getMonthlyEmi,getIntRate,GetSanctionLetter
+        label: "View Sanction",
       },
     ],
     AH: [
       {
-        url: `${prefix}view-all-loanapplications`, //Loan-disbursed,ledger-loan
-        label: "View All LoanApplications",
+        url: `${prefix}view-all-accepted`, //customer accepted sanction letter
+        label: "View All Accepted LoanApplications",
+      },
+      {
+        url: `${prefix}calculate-ledger`,
+        label: "Calculate Ledger",
       },
     ],
   },
