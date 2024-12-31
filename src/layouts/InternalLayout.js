@@ -10,6 +10,7 @@ import EnquiryStatus from "../pages/employee/EnquiryStatus";
 function InternalLayout() {
   const [employee, setEmployee] = useState({});
   const [requiredRoutes] = useState(userRoutes);
+
   const getSessionData = () => {
     const userJson = sessionStorage.getItem("user");
     const user = JSON.parse(userJson);
@@ -17,6 +18,7 @@ function InternalLayout() {
   };
 
   useEffect(getSessionData, []);
+
   return (
     <div>
       <ProfileNav data={employee} />
@@ -34,10 +36,15 @@ function InternalLayout() {
                   element={route.component}
                 />
               ))}
+              
           </Routes>
-          
-          <Data />
-          <EnquiryStatus/>
+
+          {employee.userType === "ADMIN" && (
+            <>
+              <Data />
+              <EnquiryStatus />
+            </>
+          )}
         </div>
       </div>
     </div>
