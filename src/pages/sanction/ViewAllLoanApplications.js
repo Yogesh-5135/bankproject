@@ -71,9 +71,9 @@ export default function ViewAllLoanApplications() {
         `http://localhost:9099/api/v3/generateSanctionLetter/${sanctionId}/${loanid}`
       )
       .then((response) => {
-        const base64FileData = response.data;
+        const sanctionDetails = response.data;
         navigate("/bankloan/view-saction-letter", {
-          state: { fileData: base64FileData },
+          state: { sanction: sanctionDetails },
         });
       })
       .catch((error) => {
