@@ -4,29 +4,26 @@ import { useNavigate } from "react-router-dom";
 
 export default function ViewAllAccepted({ enquiry }) {
   const [emiLedger, setEmiLedger] = useState([]);
-  const [processedLoans, setProcessedLoans] = useState(new Set()); // For tracking processed loans
+  const [processedLoans, setProcessedLoans] = useState(new Set());
   const navigate = useNavigate();
 
-  // Fetch ledger details for the given customer
   useEffect(() => {
     axios
       .get(`http://localhost:9080/api/v4/getLedger/${enquiry.customerid}`)
       .then((response) => {
         setEmiLedger(response.data);
-        console.log(response.data); // Log the response for debugging
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching loan applications data:", error);
       });
 
-    // Check localStorage for previously processed loans
     const storedProcessedLoans = JSON.parse(
       localStorage.getItem("processedLoans") || "[]"
     );
-    setProcessedLoans(new Set(storedProcessedLoans)); // Initialize the Set with previously processed loans
+    setProcessedLoans(new Set(storedProcessedLoans));
   }, [enquiry.customerid]);
 
-  // Handle the EMI payment
   const handlePayEmi = (loanid, ledgerId) => {
     axios
       .put(
@@ -35,16 +32,14 @@ export default function ViewAllAccepted({ enquiry }) {
       .then((response) => {
         alert("Loan status updated successfully!");
 
-        // Save processed loan to localStorage
         const updatedProcessedLoans = new Set(processedLoans);
         updatedProcessedLoans.add(ledgerId);
         setProcessedLoans(updatedProcessedLoans);
         localStorage.setItem(
           "processedLoans",
           JSON.stringify([...updatedProcessedLoans])
-        ); // Store in localStorage
+        );
 
-        // Optionally, refetch the ledger data if needed
         axios
           .get(`http://localhost:9080/api/v4/getLedger/${enquiry.customerid}`)
           .then((response) => {
@@ -63,16 +58,15 @@ export default function ViewAllAccepted({ enquiry }) {
       });
   };
 
-  // Navigate back to the bank loan page
   const handleBack = () => {
-    navigate("/bankloan");
+    navigate("/bankloan/customerlayout");
   };
 
   return (
     <div>
       {emiLedger.length > 0 ? (
         <div>
-          <h3>Ledger Details</h3>
+          <h3 className="text-center mt-2 ms-2 me-2">Ledger Details</h3>
           <table className="table table-bordered">
             <thead>
               <tr>
@@ -124,7 +118,7 @@ export default function ViewAllAccepted({ enquiry }) {
                         handlePayEmi(enquiry.customerid, ledgerItem.ledgerId)
                       }
                       className="btn btn-success"
-                      disabled={processedLoans.has(ledgerItem.ledgerId)} // Disable if already processed
+                      disabled={processedLoans.has(ledgerItem.ledgerId)}
                     >
                       {processedLoans.has(ledgerItem.ledgerId)
                         ? "EMI Paid"
@@ -137,7 +131,7 @@ export default function ViewAllAccepted({ enquiry }) {
           </table>
         </div>
       ) : (
-        <p>No ledger data available</p> // In case there is no ledger data
+        <p>No ledger data available</p>
       )}
 
       <button className="btn btn-secondary" onClick={handleBack}>

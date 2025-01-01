@@ -8,7 +8,6 @@ export default function ViewSanction({ enquiry }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(enquiry);
     if (!enquiry?.customerid) return;
     axios
       .get(
@@ -62,7 +61,7 @@ export default function ViewSanction({ enquiry }) {
 
   return (
     <div>
-      <h2>Sanction Letter</h2>
+      <h2 className="text-center mt-2 ms-2 me-2">Sanction Letter</h2>
       <iframe
         src={`data:application/pdf;base64,${viewSanctionletter}`}
         width="100%"
