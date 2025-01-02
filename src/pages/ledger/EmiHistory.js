@@ -46,8 +46,7 @@ export default function ViewEmiHistory() {
                 <th>Next EMI Date Start</th>
                 <th>Next EMI Date End</th>
                 <th>Defaulter Count</th>
-                <th>Previous EMI Status</th>
-                <th>Current Month EMI Status</th>
+
                 <th>Loan End Date</th>
                 <th>Loan Status</th>
               </tr>
@@ -71,8 +70,6 @@ export default function ViewEmiHistory() {
                   <td>{ledgerItem.nextEmiDateStart}</td>
                   <td>{ledgerItem.nextEmiDateEnd}</td>
                   <td>{ledgerItem.defaulterCount}</td>
-                  <td>{ledgerItem.previousEmiStatus}</td>
-                  <td>{ledgerItem.currentMonthEmiStatus}</td>
                   <td>{ledgerItem.loanEndDate}</td>
                   <td>{ledgerItem.loanStatus}</td>
                 </tr>
