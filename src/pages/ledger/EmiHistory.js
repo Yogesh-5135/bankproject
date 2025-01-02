@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function ViewEmiHistory({ enquiry }) {
+export default function ViewEmiHistory() {
   const [emiHistory, setEmiHistory] = useState([]);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
+  const { customerid } = useParams();
+  const getEmiHistory = () => {
     axios
-      .get(
-        `http://localhost:9080/api/v4/getLedgerOnlyEmiPaid/${enquiry.customerid}`
-      )
+      .get(`http://localhost:9080/api/v4/getLedgerOnlyEmiPaid/${customerid}`)
       .then((response) => {
         setEmiHistory(response.data);
         console.log(response.data);
@@ -19,7 +17,9 @@ export default function ViewEmiHistory({ enquiry }) {
       .catch((error) => {
         console.error("Error fetching loan applications data:", error);
       });
-  }, [enquiry.customerid]);
+  };
+
+  useEffect(() => getEmiHistory(), []);
 
   const handleBack = () => {
     navigate("/bankloan/customerlayout");
@@ -27,6 +27,7 @@ export default function ViewEmiHistory({ enquiry }) {
 
   return (
     <div>
+      <h1>{customerid}</h1>
       {emiHistory.length > 0 ? (
         <div>
           <h3 className="text-center mt-2 ms-2 me-2">Emi History</h3>

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const Enquirycom = ({ enquiry }) => {
+const Enquirycom = () => {
   const [customerData, setCustomerData] = useState(null);
   const navigate = useNavigate();
+  const { customerid } = useParams();
 
   function getEnquiry() {
-    if (enquiry.customerid) {
+    if (customerid) {
       axios
-        .get(`http://localhost:9090/api/v1/getCustomer/${enquiry.customerid}`)
+        .get(`http://localhost:9090/api/v1/getCustomer/${customerid}`)
         .then((response) => {
           setCustomerData(response.data);
         })

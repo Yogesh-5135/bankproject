@@ -16,17 +16,13 @@ function CustomerLayout() {
     const enquiry = JSON.parse(enquiryJSON);
     setLoginEnquiry(enquiry);
   }
-
   useEffect(getLoginEnquiry, []);
 
   return (
     <div>
       <CustomerProfileNav enquiry={loginEnquiry} setEnquiry={setLoginEnquiry} />
       <Routes>
-        <Route
-          path="view-enquiry"
-          element={<ViewEnquiry enquiry={loginEnquiry} />}
-        />
+        <Route path="view-enquiry/:customerid" element={<ViewEnquiry />} />
         <Route
           path="apply-loan"
           element={<MultiStepLoanApplicationForm enquiry={loginEnquiry} />}
@@ -39,11 +35,8 @@ function CustomerLayout() {
           path="view-sanction"
           element={<ViewSanction enquiry={loginEnquiry} />}
         />
-        <Route path="pay-emi" element={<PayEmi enquiry={loginEnquiry} />} />
-        <Route
-          path="emi-history"
-          element={<EmiHistory enquiry={loginEnquiry} />}
-        />
+        <Route path="pay-emi/:customerid" element={<PayEmi />} />
+        <Route path="emi-history/:customerid" element={<EmiHistory />} />
       </Routes>
     </div>
   );

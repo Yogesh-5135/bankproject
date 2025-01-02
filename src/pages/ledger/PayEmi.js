@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-export default function ViewAllAccepted({ enquiry }) {
+export default function ViewAllAccepted() {
   const [emiLedger, setEmiLedger] = useState([]);
+  const { customerid } = useParams();
   const [processedLoans, setProcessedLoans] = useState(new Set());
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9080/api/v4/getLedger/${enquiry.customerid}`)
+      .get(`http://localhost:9080/api/v4/getLedger/${customerid}`)
       .then((response) => {
         setEmiLedger(response.data);
         console.log(response.data);
@@ -22,7 +24,7 @@ export default function ViewAllAccepted({ enquiry }) {
       localStorage.getItem("processedLoans") || "[]"
     );
     setProcessedLoans(new Set(storedProcessedLoans));
-  }, [enquiry.customerid]);
+  }, [customerid]);
 
   const handlePayEmi = (loanid, ledgerId) => {
     axios
@@ -41,7 +43,7 @@ export default function ViewAllAccepted({ enquiry }) {
         );
 
         axios
-          .get(`http://localhost:9080/api/v4/getLedger/${enquiry.customerid}`)
+          .get(`http://localhost:9080/api/v4/getLedger/${customerid}`)
           .then((response) => {
             setEmiLedger(response.data);
           })
@@ -115,7 +117,7 @@ export default function ViewAllAccepted({ enquiry }) {
                   <td>
                     <button
                       onClick={() =>
-                        handlePayEmi(enquiry.customerid, ledgerItem.ledgerId)
+                        handlePayEmi(customerid, ledgerItem.ledgerId)
                       }
                       className="btn btn-success"
                       disabled={processedLoans.has(ledgerItem.ledgerId)}
